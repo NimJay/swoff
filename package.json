@@ -1,0 +1,25 @@
+{
+  "name": "swoff",
+  "version": "1.0.0",
+  "description": "Swoff allows for offline usage of your web app.",
+  "main": "swoff.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NimJay/swoff.git"
+  },
+  "author": "Nim Jayawardena",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/NimJay/swoff/issues"
+  },
+  "homepage": "https://github.com/NimJay/swoff#readme"
+}
