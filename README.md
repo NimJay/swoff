@@ -13,9 +13,9 @@ To bring Swoff into your app:
 3. Register `swoff.js` in one of your `<script>`s.
 ```javascript
 if (navigator.serviceWorker) {
-    navigator.serviceWorker.register("/swoff.js");
+  navigator.serviceWorker.register("/swoff.js");
 } else {
-    // Service workers not supported. :(
+  // Service workers not supported. :(
 }
 ```
 
@@ -25,7 +25,7 @@ Take a look at `URL_CACHE_INFO` in `swoff.js`.
 This is where you configure the caching of your URLs (files).
 ```javascript
 const URL_CACHE_INFO = [
-    { url: '/path/to/cached/file' }
+  { url: '/path/to/cached/file' }
 ]
 ```
 
@@ -35,13 +35,15 @@ and cache `/path/to/cached/file` when the server responds with it.
 If you want to cache `/path/to/cached/file` *as soon as* Swoff is registered and *installed*, use cacheAsap: true. In other words, Swoff won't wait for the next request for `/path/to/cached/file`.
 ```javascript
 const URL_CACHE_INFO = [
-    { url: '/path/to/cached/file', cacheAsap: true }
+  { url: '/path/to/cached/file', cacheAsap: true }
 ]
 ```
 
 Finally, use `CACHE_NAME` to manage the versioning of Swoff's cache.
 That is, change `CACHE_NAME` as the cached files' contents change.
-
+```javascript
+const CACHE_NAME = 'myapp2.1.1';
+```
 
 ## Swoff's Role in Your App
 
