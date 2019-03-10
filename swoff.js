@@ -59,20 +59,20 @@ function relUrlToAbsUrl(relUrl) {
 
 function getUrlCacheInfo(url) {
   log(`getUrlCacheInfo(${url})`);
-  return URL_CACHE_INFO.find(urlInfo => {
-    let absoluteUrl = relUrlToAbsUrl(urlInfo.url);
+  return URL_CACHE_INFO.find((urlInfo) => {
+    const absoluteUrl = relUrlToAbsUrl(urlInfo.url);
     return absoluteUrl === url;
   });
 }
 
 
 function cacheAsaps() {
-  return caches.open(CACHE_NAME).then(cache => {
+  return caches.open(CACHE_NAME).then((cache) => {
     const urlsToCache = URL_CACHE_INFO
       .filter(urlInfo => urlInfo.cacheAsap)
       .map(urlInfo => urlInfo.url);
     // TODO: See if there's a cleaner way to handle empty urlsToCache.
-    log(`Caching all of ${urlsToCache.join(', ')}.` );
+    log(`Caching all of ${urlsToCache.join(', ')}.`);
     return cache.addAll(urlsToCache);
   });
 }
@@ -82,7 +82,7 @@ function interceptFetches() {
   self.addEventListener('fetch', (event) => {
     log(`Intercepting fetch of ${event.request.url}`);
     const interception = fetchFromNetwork(event.request)
-      .catch(() => fetchFromCache(event.request))
+      .catch(() => fetchFromCache(event.request));
     event.respondWith(interception);
   });
 }
@@ -95,8 +95,8 @@ function fetchFromNetwork(request) {
       return reject();
     }
 
-    let timeoutId = setTimeout(reject, 5000);
-    let fetchedResponse = null; 
+    const timeoutId = setTimeout(reject, 5000);
+    let fetchedResponse = null;
 
     log(`Fetching from network ${request.url}.`);
     fetch(request)
@@ -114,7 +114,7 @@ function fetchFromCache(request) {
   log(`Fetching from cache: ${request.url}.`);
   return caches.open(CACHE_NAME)
     .then(cache => cache.match(request))
-    .then(matching => { 
+    .then((matching) => {
       if (!matching) { log(`Cache missed for ${request.url}.`); }
       return matching || Promise.reject();
     });
@@ -122,7 +122,7 @@ function fetchFromCache(request) {
 
 
 function cacheUrl(url) {
-  return caches.open(CACHE_NAME).then(cache => {
+  return caches.open(CACHE_NAME).then((cache) => {
     const cacheInfo = getUrlCacheInfo(url);
     if (cacheInfo) {
       log(`Caching ${url}.`);
